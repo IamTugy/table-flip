@@ -1,9 +1,8 @@
-import React, {useState} from 'react';
+import React, {ReactElement, useState} from 'react';
 import styled from 'styled-components';
 import ReactCardFlip from 'react-card-flip';
-import BackSide from '~/assets/cards/back_side.svg';
-import {getColorByTendency} from '~/assets/styles/colors';
-import {Tendency} from '~/consts';
+import {getColorByTendency} from '../../assets/styles/colors';
+import {Tendency} from '~/OneNightWerewolf/consts';
 
 
 const CardWrapper = styled.div`
@@ -36,6 +35,7 @@ const CardContentText = styled.div`
 `;
 
 const FrontCardWrapper = styled(CardWrapper)<{tendency: Tendency}>`
+  box-sizing: border-box;
   border: 3px solid ${({tendency}) => getColorByTendency({tendency})};
 `;
 
@@ -44,7 +44,8 @@ const BackCardWrapper = styled(CardWrapper)`
 `;
 
 export type CardContent = {
-  image: SVGElement;
+  frontIcon: ReactElement;
+  backIcon: ReactElement;
   headline: string;
   description: string;
   tendency: Tendency;
@@ -52,15 +53,15 @@ export type CardContent = {
 }
 
 
-export const Card: React.FC<CardContent> = ({image, headline, description, tendency, showDescription=false}) => {
+export const Card: React.FC<CardContent> = ({frontIcon, backIcon, headline, description, tendency, showDescription=false}) => {
   const [isFlipped, setIsFlipped] = useState(false);
   return (
     <ReactCardFlip isFlipped={isFlipped} flipDirection="horizontal">
       <BackCardWrapper onClick={() => setIsFlipped(true)}>
-        <BackSide/>
+        {backIcon}
       </BackCardWrapper>
       <FrontCardWrapper onClick={() => setIsFlipped(false)} tendency={tendency}>
-        {image}
+        {frontIcon}
         <CardHeadline tendency={tendency}>{headline}</CardHeadline>
         {showDescription && <CardContentText>{description}</CardContentText>}
       </FrontCardWrapper>

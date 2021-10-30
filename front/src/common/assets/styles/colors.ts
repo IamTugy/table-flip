@@ -1,4 +1,4 @@
-import {Tendency} from '~/consts';
+import {Tendency} from '~/OneNightWerewolf/consts';
 
 export const evilRed=`#990000`;
 export const goodGreen=`#008B0E`;
