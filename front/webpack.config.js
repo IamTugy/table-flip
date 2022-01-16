@@ -1,6 +1,5 @@
 const path = require('path');
 
-const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
@@ -14,7 +13,7 @@ module.exports = {
   entry: ['react-hot-loader/patch', path.resolve(src, 'index.tsx')],
   mode: isDevelopment ? 'development' : 'production',
   output: {
-    library: 'dashall',
+    library: 'TableFlip',
     filename: 'bundle.js',
     path: dist,
   },
@@ -22,7 +21,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(src, 'index.html'),
     }),
-    isDevelopment && new ErrorOverlayPlugin(),
   ].filter(Boolean),
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],

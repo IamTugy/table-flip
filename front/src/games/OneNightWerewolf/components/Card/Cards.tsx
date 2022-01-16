@@ -1,17 +1,32 @@
-import React from 'react';
+import React, {ReactElement} from 'react';
 
 import {Card} from '~/common/components/Card/Card';
-import WerewolfIcon from '../assets/cards/werewolf.svg';
-import DrunkIcon from '../assets/cards/drunk.svg';
-import SeerIcon from '../assets/cards/seer.svg';
-import BackCardIcon from '../assets/cards/back_side.svg';
-import {Tendency} from "~/OneNightWerewolf/consts";
+import WerewolfIcon from '~/games/OneNightWerewolf/assets/cards/werewolf.svg';
+import DrunkIcon from '~/games/OneNightWerewolf/assets/cards/drunk.svg';
+import SeerIcon from '~/games/OneNightWerewolf/assets/cards/seer.svg';
+import BackCardIcon from '~/games/OneNightWerewolf/assets/cards/back_side.svg';
+import {Tendency} from '~/common/data/consts';
+
+
+export type OneNightWerewolfCardContent = {
+  frontIcon: ReactElement;
+  headline: string;
+  description: string;
+  tendency: Tendency;
+  showDescription: boolean;
+}
+
+export const OneNightWerewolfCard: React.FC<OneNightWerewolfCardContent> = (args) => {
+  return <Card
+    backIcon={<BackCardIcon/>}
+    {...args}
+  />;
+};
 
 
 export const Werewolf = () => {
-  return <Card
+  return <OneNightWerewolfCard
     frontIcon={<WerewolfIcon/>}
-    backIcon={<BackCardIcon/>}
     headline='Werewolf'
     description={`
             Your role is to not get caught.
@@ -25,9 +40,8 @@ export const Werewolf = () => {
 
 
 export const Drunk = () => {
-  return <Card
+  return <OneNightWerewolfCard
     frontIcon={<DrunkIcon/>}
-    backIcon={<BackCardIcon/>}
     headline='Drunk'
     description={`
             The Drunk exchanges his card with a card in the center and does not look at it.
@@ -40,9 +54,8 @@ export const Drunk = () => {
 
 
 export const Seer = () => {
-  return <Card
+  return <OneNightWerewolfCard
     frontIcon={<SeerIcon/>}
-    backIcon={<BackCardIcon/>}
     headline='Seer'
     description={`
             At night the seer gets to see another player's card or two of thw cards in the center.

@@ -16,7 +16,6 @@
     "lodash": "^4.17.20",
     "lodash-move": "^1.1.1",
     "react": "^17.0.1",
-    "react-card-flip": "^1.1.3",
     "react-dom": "npm:@hot-loader/react-dom",
     "react-hot-loader": "^4.13.0",
     "react-resize-detector": "^5.2.0",

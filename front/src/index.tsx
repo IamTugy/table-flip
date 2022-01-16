@@ -4,16 +4,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import GlobalStyle from './common/components/globalStyles';
-import {ColContainer, RowContainer} from './common/components/common';
-import {Drunk, Seer, Werewolf} from '~/OneNightWerewolf/components/Cards';
+import {RowContainer} from './common/components/common';
+import {Lobby} from '~/lobby/main';
 
 const AppWrapper = styled(RowContainer)`
   width: 100%;
   height: 100%;
   display: flex;
+  flex-direction: column;
   background-color: black;
-  align-items: center;
-  justify-content: center;
+  margin: auto;
 `;
 
 const App = () => {
@@ -22,9 +22,7 @@ const App = () => {
       <GlobalStyle />
       <AppWrapper>
         <RowContainer stretched>
-          <Werewolf/>
-          <Drunk/>
-          <Seer/>
+          <Lobby/>
         </RowContainer>
       </AppWrapper>
     </>
