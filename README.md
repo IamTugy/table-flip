@@ -1,2 +1,2 @@
-# table-flip
+# TableFlip
 Mobile board games
