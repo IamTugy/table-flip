@@ -22,20 +22,15 @@ export default {
 
 const Page = styled.div`
   display: flex;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   padding: 4rem;
   margin: auto;
   
   background-color: black;
 `;
 
-const Template = (args) => <Page><Werewolf/></Page>;
+const Template = (args) => <Page><Werewolf/><Seer/><Drunk/></Page>;
 
-export const Primary = Template.bind({});
-
-// Primary.args = {
-//   frontIcon: {name: 'Werewolf', value: <Werewolf/>},
-// };
-
-
+export const Roles = Template.bind({});
