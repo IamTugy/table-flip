@@ -1,4 +1,6 @@
 const path = require('path');
+const webpack = require('webpack');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -10,7 +12,7 @@ const dist = path.resolve(__dirname, 'build');
 
 module.exports = {
   devtool: isDevelopment && 'cheap-module-source-map',
-  entry: ['react-hot-loader/patch', path.resolve(src, 'index.tsx')],
+  entry: [path.resolve(src, 'index.tsx')],
   mode: isDevelopment ? 'development' : 'production',
   output: {
     library: 'TableFlip',
@@ -21,12 +23,14 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(src, 'index.html'),
     }),
+    isDevelopment && new webpack.HotModuleReplacementPlugin(),
+    isDevelopment && new ReactRefreshWebpackPlugin(),
   ].filter(Boolean),
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
   devServer: {
-    contentBase: dist,
+    static: dist,
     compress: true,
     port: 9000,
     hot: true,
@@ -38,6 +42,9 @@ module.exports = {
         exclude: /node_modules/,
         include: src,
         loader: require.resolve('babel-loader'),
+        options: {
+          plugins: [isDevelopment && require.resolve('react-refresh/babel')].filter(Boolean),
+        },
       },
       {
         test: /\.(jpe?g|png|gif)$/i,

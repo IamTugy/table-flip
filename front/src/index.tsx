@@ -1,5 +1,3 @@
-import {hot} from 'react-hot-loader/root';
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
@@ -13,10 +11,11 @@ const AppWrapper = styled(RowContainer)`
   display: flex;
   flex-direction: column;
   background-color: black;
-  margin: auto;
+  min-height: 0;
+  min-width: 0;
 `;
 
-const App = () => {
+export const App = () => {
   return (
     <>
       <GlobalStyle />
@@ -33,4 +32,4 @@ const renderApp = (Component: React.FC) => {
   ReactDOM.render(<Component />, document.getElementById('root'));
 };
 
-renderApp(hot(App));
+renderApp(App);

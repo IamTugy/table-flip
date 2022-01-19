@@ -3,34 +3,36 @@ import styled from 'styled-components';
 import {getColorByTendency} from '../../assets/styles/colors';
 import {useSpring} from 'react-spring';
 import {Tendency} from '../../data/consts';
-import Flip from './flip';
+import Flip, {BackCard, FrontCard} from './flip';
+import {RowContainer} from "~/common/components/common";
 
 
 const CardWrapper = styled.div`
   display: flex;
   background-color: white;
   border-radius: 3rem;
-  width: 22.5rem;
-  height: 600px;
+  box-sizing: border-box;
   margin: auto;
+  padding: 1rem;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
+  height: 100%;
+  user-select: none;
 `;
 
 const CardHeadline = styled.div<{tendency: Tendency}>`
   font-family: PoetsenOne;
-  font-size: 32px;
-  line-height: 38px;
+  font-size: 2rem;
+  line-height: 2;
   text-align: center;
   color: ${({tendency}) => getColorByTendency({tendency})};
 `;
 
 const CardContentText = styled.div`
-  width: 17rem;
   font-family: Poly;
-  font-size: 18px;
-  line-height: 21px;
+  padding: 0.1rem;
+  font-size: 1.1rem;
+  line-height: 1;
   text-align: center;
   color: black;
 `;
@@ -42,6 +44,10 @@ const FrontCardWrapper = styled(CardWrapper)<{tendency: Tendency}>`
 
 
 const BackCardWrapper = styled(CardWrapper)`
+  & svg {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 export type CardContent = {
@@ -53,19 +59,21 @@ export type CardContent = {
   showDescription: boolean;
 }
 
+const CardContainer = styled(RowContainer)`
+  width: 22.5rem;
+  aspect-ratio: 1.9 / 3;
+  box-sizing: border-box;
+`;
+
 
 const FlipCard: React.FC = ({children}) => {
   const [isFlipped, setIsFlipped] = useState(false);
-  // const flipStyle = useSpring({
-  //   to: {transform: 'rotateY(180deg)'},
-  //   from: {transform: 'rotateY(0deg)'},
-  // });
   return (
-    <div onClick={() => setIsFlipped(!isFlipped)}>
+    <CardContainer onClick={() => setIsFlipped(!isFlipped)}>
       <Flip isFlipped={isFlipped}>
         {children}
       </Flip>
-    </div>
+    </CardContainer>
   );
 };
 
@@ -73,14 +81,18 @@ const FlipCard: React.FC = ({children}) => {
 export const Card: React.FC<CardContent> = ({frontIcon, backIcon, headline, description, tendency, showDescription=false}) => {
   return (
     <FlipCard>
-      <BackCardWrapper>
-        {backIcon}
-      </BackCardWrapper>
-      <FrontCardWrapper tendency={tendency}>
-        {frontIcon}
-        <CardHeadline tendency={tendency}>{headline}</CardHeadline>
-        {showDescription && <CardContentText>{description}</CardContentText>}
-      </FrontCardWrapper>
+      <BackCard>
+        <BackCardWrapper>
+          {backIcon}
+        </BackCardWrapper>
+      </BackCard>
+      <FrontCard>
+        <FrontCardWrapper tendency={tendency}>
+          {frontIcon}
+          <CardHeadline tendency={tendency}>{headline}</CardHeadline>
+          {showDescription && <CardContentText>{description}</CardContentText>}
+        </FrontCardWrapper>
+      </FrontCard>
     </FlipCard>
   );
 };
@@ -95,7 +107,7 @@ export type GameCardContent = {
 
 const GameHeadline = styled.div`
   font-family: PoetsenOne;
-  font-size: 32px;
+  font-size: 2rem;
   line-height: 38px;
   text-align: center;
 `;

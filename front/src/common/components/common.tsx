@@ -11,6 +11,8 @@ export const RowContainer = styled.div<ContainerProps>`
   position: relative;
   flex: ${({stretched}) => stretched ? 1 : undefined};
   overflow: ${({scrollable}) => scrollable ? 'auto' : undefined};
+  min-height: 0;
+  min-width: 0;
 `;
 
 export const ColContainer = styled(RowContainer)`

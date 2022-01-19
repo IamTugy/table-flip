@@ -1,11 +1,16 @@
 module.exports = {
+  core: {
+    builder: 'webpack5'
+  },
   stories: [
     "../src/**/*.stories.mdx",
     "../src/**/*.stories.@(js|jsx|ts|tsx)"
   ],
   addons: [
-    "@storybook/addon-links",
     "@storybook/addon-essentials",
+    "@storybook/addon-links",
+    "@storybook/addon-viewport",
+    "storybook-mobile",
     {
       name: '@storybook/addon-docs',
       options: {
@@ -20,10 +25,13 @@ module.exports = {
     const fileLoaderRule = rules.find(rule => rule.test && rule.test.test('.svg'));
     fileLoaderRule.exclude = /\.svg$/;
 
-    config.module.rules.push({
+    rules.push({
       test: /\.svg$/,
-      enforce: 'pre',
+      // enforce: 'pre',
       loader: require.resolve('@svgr/webpack'),
+      issuer: {
+        and: [/\.(ts|tsx|js|jsx|md|mdx)$/],
+      },
     });
     rules.push({
       test: /\.(ts|tsx)$/,
@@ -31,9 +39,9 @@ module.exports = {
         {
           loader: require.resolve("babel-loader")
         },
-        {
-          loader: require.resolve('react-docgen-typescript-loader'),
-        },
+        // {
+        //   loader: require.resolve('react-docgen-typescript-loader'),
+        // },
       ]
     });
     config.resolve.extensions.push(".ts", ".tsx");
