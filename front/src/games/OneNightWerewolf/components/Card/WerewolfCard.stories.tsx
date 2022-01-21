@@ -1,15 +1,14 @@
-import React from 'react';
-import styled from 'styled-components';
+import {ComponentMeta} from '@storybook/react'
+import React from 'react'
+import styled from 'styled-components'
 
-import {ComponentMeta} from '@storybook/react';
-
-import {OneNightWerewolfCard, Werewolf} from '~/games/OneNightWerewolf/components/Card/Cards';
+import {OneNightWerewolfCard, Werewolf} from '~/games/OneNightWerewolf/components/Card/Cards'
 
 
 export default {
   title: 'Components/OneNightWerewolf/Cards/Werewolf',
   component: Werewolf,
-} as ComponentMeta<typeof OneNightWerewolfCard>;
+} as ComponentMeta<typeof OneNightWerewolfCard>
 
 const Page = styled.div`
   display: flex;
@@ -19,8 +18,8 @@ const Page = styled.div`
   margin: auto;
   
   background-color: black;
-`;
+`
 
-const Template = () => <Page><Werewolf/></Page>;
+const Template = () => <Page><Werewolf/></Page>
 
-export const Roles = Template.bind({});
+export const Roles = Template.bind({})

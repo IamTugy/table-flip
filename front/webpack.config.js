@@ -1,14 +1,14 @@
-const path = require('path');
-const webpack = require('webpack');
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const path = require('path')
+const webpack = require('webpack')
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-const isDevelopment = process.env.NODE_ENV !== 'production';
+const isDevelopment = process.env.NODE_ENV !== 'production'
 
 
-const src = path.resolve(__dirname, 'src');
-const dist = path.resolve(__dirname, 'build');
+const src = path.resolve(__dirname, 'src')
+const dist = path.resolve(__dirname, 'build')
 
 module.exports = {
   devtool: isDevelopment && 'cheap-module-source-map',
@@ -78,4 +78,4 @@ module.exports = {
       },
     ],
   },
-};
+}

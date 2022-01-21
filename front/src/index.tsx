@@ -1,9 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import styled from 'styled-components';
-import GlobalStyle from './common/components/globalStyles';
-import {RowContainer} from './common/components/common';
-import {Lobby} from '~/lobby/main';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import styled from 'styled-components'
+
+import {Lobby} from '~/lobby/main'
+
+import {RowContainer} from './common/components/common'
+import GlobalStyle from './common/components/globalStyles'
 
 const AppWrapper = styled(RowContainer)`
   width: 100%;
@@ -13,7 +15,7 @@ const AppWrapper = styled(RowContainer)`
   background-color: black;
   min-height: 0;
   min-width: 0;
-`;
+`
 
 export const App = () => {
   return (
@@ -25,11 +27,11 @@ export const App = () => {
         </RowContainer>
       </AppWrapper>
     </>
-  );
-};
+  )
+}
 
 const renderApp = (Component: React.FC) => {
-  ReactDOM.render(<Component />, document.getElementById('root'));
-};
+  ReactDOM.render(<Component />, document.getElementById('root'))
+}
 
-renderApp(App);
+renderApp(App)

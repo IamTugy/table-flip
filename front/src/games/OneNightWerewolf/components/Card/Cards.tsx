@@ -1,11 +1,11 @@
-import React, {ReactElement} from 'react';
+import React, {ReactElement} from 'react'
 
-import {Card} from '~/common/components/Card/Card';
-import WerewolfIcon from '~/games/OneNightWerewolf/assets/cards/werewolf.svg';
-import DrunkIcon from '~/games/OneNightWerewolf/assets/cards/drunk.svg';
-import SeerIcon from '~/games/OneNightWerewolf/assets/cards/seer.svg';
-import BackCardIcon from '~/games/OneNightWerewolf/assets/cards/back_side.svg';
-import {Tendency} from '~/common/data/consts';
+import {GameCard} from '~/common/components/Card/Card'
+import {Tendency} from '~/common/data/consts'
+import BackCardIcon from '~/games/OneNightWerewolf/assets/cards/back_side.svg'
+import DrunkIcon from '~/games/OneNightWerewolf/assets/cards/drunk.svg'
+import SeerIcon from '~/games/OneNightWerewolf/assets/cards/seer.svg'
+import WerewolfIcon from '~/games/OneNightWerewolf/assets/cards/werewolf.svg'
 
 
 export type OneNightWerewolfCardContent = {
@@ -17,11 +17,11 @@ export type OneNightWerewolfCardContent = {
 }
 
 export const OneNightWerewolfCard: React.FC<OneNightWerewolfCardContent> = (args) => {
-  return <Card
+  return <GameCard
     backIcon={<BackCardIcon/>}
     {...args}
-  />;
-};
+  />
+}
 
 
 export const Werewolf = () => {
@@ -35,8 +35,8 @@ export const Werewolf = () => {
             `}
     tendency={Tendency.evil}
     showDescription
-  />;
-};
+  />
+}
 
 
 export const Drunk = () => {
@@ -49,8 +49,8 @@ export const Drunk = () => {
             `}
     tendency={Tendency.good}
     showDescription
-  />;
-};
+  />
+}
 
 
 export const Seer = () => {
@@ -62,5 +62,5 @@ export const Seer = () => {
             `}
     tendency={Tendency.good}
     showDescription
-  />;
-};
+  />
+}

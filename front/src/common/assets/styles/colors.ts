@@ -1,7 +1,7 @@
-import {Tendency} from '../../data/consts';
+import {Tendency} from '../../data/consts'
 
-export const evilRed=`#990000`;
-export const goodGreen=`#008B0E`;
+export const evilRed=`#990000`
+export const goodGreen=`#008B0E`
 
 type GetColorByTendencyProps = {
   tendency: Tendency
@@ -10,10 +10,10 @@ type GetColorByTendencyProps = {
 export const getColorByTendency = ({tendency}: GetColorByTendencyProps) => {
   switch (tendency) {
     case Tendency.evil:
-      return evilRed;
+      return evilRed
     case Tendency.good:
-      return goodGreen;
+      return goodGreen
     default:
-      return;
+      return
   }
-};
+}

@@ -4,13 +4,14 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack serve",
-    "lint": "eslint --ext .ts --ext .js --ext .jsx --ext .tsx src/",
+    "lint:eslint": "eslint --ext .ts --ext .js --ext .jsx --ext .tsx src/",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
   "dependencies": {
     "@types/lodash": "^4.14.167",
     "@types/styled-components": "^5.1.7",
+    "@use-gesture/react": "^10.2.4",
     "bezier-easing": "^2.1.0",
     "framer-motion": "^6.0.0",
     "lodash": "^4.17.20",
@@ -19,7 +20,6 @@
     "react-dom": "^17.0.2",
     "react-resize-detector": "^7.0.0",
     "react-spring": "^9.0.0-rc.3",
-    "react-use-gesture": "^9.0.0-beta.11",
     "styled-components": "^5.2.1"
   },
   "devDependencies": {
@@ -48,7 +48,10 @@
     "error-overlay-webpack-plugin": "^1.0.0",
     "eslint": "^8.7.0",
     "eslint-config-google": "^0.14.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-module-resolver": "^1.4.0",
     "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
     "react-docgen-typescript-loader": "^3.7.2",

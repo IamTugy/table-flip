@@ -1,22 +1,23 @@
-import React from 'react';
-import BackCardIcon from './assets/cards/back_side.svg';
+import React from 'react'
+import styled from 'styled-components'
 
-import {GameCard} from '~/common/components/Card/Card';
-import {Werewolf} from "~/games/OneNightWerewolf/components/Card/Cards";
-import styled from "styled-components";
-import {RowContainer} from "~/common/components/common";
+import {GameRulesCard} from '~/common/components/Card/Card'
+import {RowContainer} from '~/common/components/common'
+import {Werewolf} from '~/games/OneNightWerewolf/components/Card/Cards'
+
+import BackCardIcon from './assets/cards/back_side.svg'
 
 
 const Table = styled(RowContainer)`
   margin: auto;
   padding: 1rem;
-`;
+`
 
 export default () => {
   return (
     <Table>
       <Werewolf/>
-      {/*<GameCard*/}
+      {/*<GameRulesCard*/}
       {/*  backIcon={<BackCardIcon/>}*/}
       {/*  name='One Night Werewolf'*/}
       {/*  description={`*/}
@@ -25,9 +26,7 @@ export default () => {
       {/*    characters, each with a special ability. In the course of a single morning, your village will decide who is a */}
       {/*    werewolf...because all it takes is lynching one werewolf to win!*/}
       {/*  `}*/}
-      {/*  minPlayers={3}*/}
-      {/*  maxPlayers={10}*/}
       {/*/>*/}
     </Table>
-  );
-};
+  )
+}
