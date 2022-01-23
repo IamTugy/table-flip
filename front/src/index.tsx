@@ -8,9 +8,8 @@ import {RowContainer} from './common/components/common'
 import GlobalStyle from './common/components/globalStyles'
 
 const AppWrapper = styled(RowContainer)`
-  width: 100%;
-  height: 100%;
   display: flex;
+  flex: 1;
   flex-direction: column;
   background-color: black;
   min-height: 0;
@@ -20,7 +19,7 @@ const AppWrapper = styled(RowContainer)`
 export const App = () => {
   return (
     <>
-      <GlobalStyle />
+      <GlobalStyle/>
       <AppWrapper>
         <RowContainer stretched>
           <Lobby/>
@@ -31,7 +30,7 @@ export const App = () => {
 }
 
 const renderApp = (Component: React.FC) => {
-  ReactDOM.render(<Component />, document.getElementById('root'))
+  ReactDOM.render(<Component/>, document.getElementById('root'))
 }
 
 renderApp(App)

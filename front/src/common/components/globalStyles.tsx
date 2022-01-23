@@ -2,13 +2,13 @@ import {createGlobalStyle} from 'styled-components'
 
 
 const GlobalStyles = createGlobalStyle`
-  html,body, #root {
+  html, body, #root {
+    height: 100%;
+    width: 100%;
     overflow: hidden;
     margin: 0;
     padding: 0;
     display: flex !important;
-    width: 100%;
-    height: 100%;
   }
 `
 
