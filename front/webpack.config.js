@@ -3,6 +3,8 @@ const webpack = require('webpack')
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const WorkboxPlugin = require('workbox-webpack-plugin')
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
@@ -18,10 +20,28 @@ module.exports = {
     library: 'TableFlip',
     filename: 'bundle.js',
     path: dist,
+    publicPath: '/',
   },
   plugins: [
     new HtmlWebpackPlugin({
+      title: 'Progressive Web Application',
       template: path.resolve(src, 'index.html'),
+    }),
+    new WorkboxPlugin.GenerateSW({
+      clientsClaim: true,
+      skipWaiting: true,
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(src, 'assets', 'icons'),
+          to: path.resolve(dist, 'static', 'icons'),
+        },
+        {
+          from: path.resolve(src, 'manifest.json'),
+          to: path.resolve(dist, 'static'),
+        },
+      ],
     }),
     isDevelopment && new webpack.HotModuleReplacementPlugin(),
     isDevelopment && new ReactRefreshWebpackPlugin(),
@@ -30,10 +50,14 @@ module.exports = {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
   devServer: {
+    host: '0.0.0.0',
     static: dist,
     compress: true,
     port: 9000,
     hot: true,
+    headers: {
+      'Service-Worker-Allowed': '/',
+    },
   },
   module: {
     rules: [
