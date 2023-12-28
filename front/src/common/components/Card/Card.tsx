@@ -1,10 +1,12 @@
 import {useDrag} from '@use-gesture/react'
-import React, {ReactElement, useContext, useState} from 'react'
+import React, {ReactElement, useContext} from 'react'
 import {animated, useSpring} from 'react-spring'
 import styled from 'styled-components'
 
+import {flipCard} from '~/common/components/Card/cardsSlice'
 import {CardPropsContext, CardPropsContextType} from '~/common/components/CardsLayout/CardsDeck'
 import {AnimatedRowContainer} from '~/common/components/common'
+import {useAppDispatch, useAppSelector} from '~/store/hooks'
 
 import {getColorByTendency} from '../../assets/styles/colors'
 import {Tendency} from '../../data/consts'
@@ -71,15 +73,6 @@ export const BackCardWrapper = styled(CardWrapper)`
 ;
 `
 
-export type CardContent = {
-  frontIcon: ReactElement;
-  backIcon: ReactElement;
-  headline: string;
-  description: string;
-  tendency: Tendency;
-  showDescription: boolean;
-}
-
 
 const CardContainer = styled(AnimatedRowContainer)`
   box-sizing: border-box;
@@ -93,18 +86,28 @@ const CardContainer = styled(AnimatedRowContainer)`
 type CardProps = {
   flippable?: boolean
   swippable?: boolean
+  onGone?: CallableFunction
+  cardIndex: number
   FrontFace: React.ReactNode
   BackFace: React.ReactNode
 };
 
 
-const Card: React.FC<CardProps> = ({BackFace, FrontFace, flippable = false, swippable = false}) => {
+const Card: React.FC<CardProps> = ({
+  FrontFace,
+  BackFace,
+  cardIndex,
+  flippable = false,
+  swippable = false,
+  onGone = null,
+}) => {
+  const dispatch = useAppDispatch()
+  const {x, y, clicked, inMotion, flipped} = useAppSelector((state) => state.cards.cards[cardIndex])
   const cardBoundaries: CardPropsContextType = useContext(CardPropsContext)
 
   const calculateCardBoundaries = () => {
     const {width, height} = cardBoundaries
     if (!width || !height) return {}
-    console.log({width, height})
     if (width > height) {
       const newWidth = height * cardRatio
       if (newWidth <= width) return {width: newWidth, height}
@@ -120,13 +123,12 @@ const Card: React.FC<CardProps> = ({BackFace, FrontFace, flippable = false, swip
 
   const
     to = {x: 0, y: 0}
-  const [isFlipped, setIsFlipped] = useState(false)
   const [props, api] = useSpring(() => ({...to, from: {x: 0, y: -1000}}))
 
   const bind = useDrag(({memo, active, down, last, movement: [xDelta, yDelta], velocity, tap}) => {
     const trigger = Math.sqrt((velocity[0] ** 2) + (velocity[1] ** 2)) > 1.5
     const gone = memo?.gone || (last && trigger)
-    tap && !down && setIsFlipped(!isFlipped)
+    tap && !down && dispatch(flipCard({cardIndex}))
 
     const alpha = Math.atan2(yDelta, xDelta)
     const [xVecDir, yVecDir] = [Math.cos(alpha), Math.sin(alpha)]
@@ -144,8 +146,8 @@ const Card: React.FC<CardProps> = ({BackFace, FrontFace, flippable = false, swip
       } : {}
     })
     // come back after 0.5 second:
-    if (!down && gone) {
-      // TODO: we dismissed the card call api / do action ...
+    if (!down && gone && onGone) {
+      onGone()
       setTimeout(() => {
         api.start(() => to)
       }, 500)
@@ -173,7 +175,7 @@ const Card: React.FC<CardProps> = ({BackFace, FrontFace, flippable = false, swip
   </>
   if (flippable) {
     component = (
-      <Flippable isFlipped={isFlipped}>
+      <Flippable isFlipped={flipped}>
         {component}
       </Flippable>
     )
@@ -190,17 +192,18 @@ const Card: React.FC<CardProps> = ({BackFace, FrontFace, flippable = false, swip
 }
 
 
-export const GameCard: React.FC<CardContent> = (
-  {
-    frontIcon,
+export const GameCard: React.FC<{ cardIndex: number }> = ({cardIndex}) => {
+  const {
     backIcon,
+    frontIcon,
+    tendency,
     headline,
     description,
-    tendency,
-    showDescription = false,
-  }) => {
+    showDescription,
+  } = useAppSelector((state) => state.cards.cards[cardIndex])
   return (
     <Card flippable swippable
+          cardIndex={cardIndex}
           BackFace={
             <BackCardWrapper>
               {backIcon}
@@ -220,9 +223,10 @@ export const GameCard: React.FC<CardContent> = (
 }
 
 export type GameCardContent = {
-  backIcon: ReactElement;
-  name: string;
-  description: string;
+  cardIndex: number
+  backIcon: ReactElement
+  name: string
+  description: string
 }
 
 const GameHeadline = styled.div`
@@ -232,9 +236,10 @@ const GameHeadline = styled.div`
   text-align: center;
 `
 
-export const GameRulesCard: React.FC<GameCardContent> = ({backIcon, name, description}) => {
+export const GameRulesCard: React.FC<GameCardContent> = ({cardIndex, backIcon, name, description}) => {
   return (
     <Card flippable
+          cardIndex={cardIndex}
           BackFace={
             <BackCardWrapper>
               {backIcon}

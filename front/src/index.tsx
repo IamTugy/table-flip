@@ -1,8 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import {Provider} from 'react-redux'
+import {PersistGate} from 'redux-persist/integration/react'
 import styled from 'styled-components'
 
-import {Lobby} from '~/lobby/main'
+import {Game} from '~/games/OneNightWerewolf'
+import store, {persistor} from '~/store'
 
 import {RowContainer} from './common/components/common'
 import GlobalStyle from './common/components/globalStyles'
@@ -22,7 +25,7 @@ export const App = () => {
       <GlobalStyle/>
       <AppWrapper>
         <RowContainer stretched>
-          <Lobby/>
+          <Game/>
         </RowContainer>
       </AppWrapper>
     </>
@@ -30,7 +33,14 @@ export const App = () => {
 }
 
 const renderApp = (Component: React.FC) => {
-  ReactDOM.render(<Component/>, document.getElementById('root'))
+  ReactDOM.render(
+    <Provider store={store}>
+      <PersistGate persistor={persistor} loading={null}>
+        <Component/>
+      </PersistGate>
+    </Provider>
+    , document.getElementById('root'),
+  )
 }
 
 renderApp(App)
