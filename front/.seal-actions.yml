@@ -1,6 +1,6 @@
 meta:
   schema-version: 0.1.0
-  created-on: "2024-02-04T20:42:41Z"
+  created-on: "2024-02-05T09:32:02Z"
   cli-version: 0.2.0
 projects:
   iamtugy-tableflip:
@@ -11,48 +11,48 @@ projects:
       name: yarn
       version: "1"
     overrides:
-      word-wrap:
-        1.2.3:
-          use: 1.2.3-sp1
       semver:
-        5.7.1:
-          use: 5.7.1-sp1
         7.0.0:
           use: 7.0.0-sp1
         6.3.0:
           use: 6.3.0-sp1
         7.3.5:
           use: 7.3.5-sp1
-      ansi-regex:
-        3.0.0:
-          use: 3.0.0-sp1
-      loader-utils:
-        2.0.0:
-          use: 2.0.0-sp1
-        2.0.2:
-          use: 2.0.2-sp1
-        1.4.0:
-          use: 1.4.0-sp1
-      glob-parent:
-        3.1.0:
-          use: 3.1.0-sp1
-      decode-uri-component:
-        0.2.0:
-          use: 0.2.0-sp1
+        5.7.1:
+          use: 5.7.1-sp1
       json5:
-        2.2.0:
-          use: 2.2.0-sp1
         0.5.1:
           use: 0.5.1-sp1
+        2.2.0:
+          use: 2.2.0-sp1
       trim:
         0.0.1:
           use: 0.0.1-sp1
-      postcss:
-        7.0.39:
-          use: 7.0.39-sp1
-      async:
-        2.6.3:
-          use: 2.6.3-sp1
+      decode-uri-component:
+        0.2.0:
+          use: 0.2.0-sp1
+      ansi-regex:
+        3.0.0:
+          use: 3.0.0-sp1
       minimatch:
         3.0.4:
           use: 3.0.4-sp1
+      glob-parent:
+        3.1.0:
+          use: 3.1.0-sp1
+      postcss:
+        7.0.39:
+          use: 7.0.39-sp1
+      loader-utils:
+        1.4.0:
+          use: 1.4.0-sp1
+        2.0.2:
+          use: 2.0.2-sp1
+        2.0.0:
+          use: 2.0.0-sp1
+      async:
+        2.6.3:
+          use: 2.6.3-sp1
+      word-wrap:
+        1.2.3:
+          use: 1.2.3-sp1
