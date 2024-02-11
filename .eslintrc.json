@@ -1,0 +1,80 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:storybook/recommended",
+    "plugin:react-hooks/recommended"
+  ],
+  "overrides": [],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react", "@typescript-eslint", "prettier", "import"],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "react/no-unescaped-entities": "off",
+    "quotes": [
+      "error",
+      "double",
+      {
+        "avoidEscape": true
+      }
+    ],
+    "import/extensions": [
+      "error",
+      "never",
+      {
+        // For imports, we don't want to use extensions such as .ts or .tsx
+        "page": "always", // These are special cases for pages with this extension
+        "store": "always",
+        "utils": "always",
+        "svg": "always",
+        "png": "always",
+        "json": "always",
+        "webp": "always"
+      }
+    ],
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin", // Built-in imports (come from NodeJS native) go first
+          "external", // <- External imports
+          "internal", // <- Absolute imports
+          ["sibling", "parent"], // <- Relative imports, the sibling and parent types they can be mingled together
+          "index", // <- index imports
+          "unknown" // <- unknown
+        ],
+        "newlines-between": "always",
+        "alphabetize": {
+          /* sort in ascending order. Options: ["ignore", "asc", "desc"] */
+          "order": "asc",
+          /* ignore case. Options: [true, false] */
+          "caseInsensitive": true
+        }
+      }
+    ],
+    "no-debugger": "error",
+    // note you must disable the base rule as it can report incorrect errors
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "varsIgnorePattern": "^_$"
+      }
+    ]
+  }
+}
