@@ -68,9 +68,9 @@ export const Clickable: StoryFn = () => {
       <Card
         backside={
           <div className="flex-center flex-col h-full w-full text-2xl font-semibold">
-            Now im flipped
+            I am flipped!
             <br />
-            <span className="text-base">(click again...)</span>
+            <span className="text-base">now click again...</span>
           </div>
         }
         className={twJoin(
